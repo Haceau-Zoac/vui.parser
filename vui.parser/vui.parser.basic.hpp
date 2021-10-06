@@ -4,9 +4,12 @@
 
 #include <cctype>
 #include <cinttypes>
+#include <algorithm>
 #include <any>
 #include <string>
 #include <map>
+#include <locale>
+#include <functional>
 
 namespace vui::parser
 {
@@ -20,15 +23,9 @@ namespace vui::parser
     using object_type = std::pair<string_type, std::map<string_type, std::any>>;
 
     basic_parser(ArgT const& s) noexcept
-      : stream_(s)
-    {
-      parse();
-    }
+      : stream_(StreamT(s)) { parse(); }
 
-    bool root(string_type& result) noexcept
-    {
-      
-    }
+    string_type root() noexcept { return obj_.first; }
 
     template <typename T = string_type>
     bool get(string_type const& key, T& result) noexcept
@@ -61,11 +58,21 @@ namespace vui::parser
       return true;
     }
 
-    bool read_to(CharT end, string_type& out) noexcept
+    char skip_whitespace() noexcept
     {
       CharT c{};
-      while ((stream_ >> c) && (c != end) && (c != EOF))
+      while ((stream_ >> c) && isspace(c));
+      return c;
+    }
+
+    bool read_to(CharT end, string_type& out) noexcept
+    {
+      CharT c{ skip_whitespace() };
+      while ((c != end) && (c != EOF))
+      {
         out += c;
+        stream_ >> c;
+      }
       return c != EOF;
     }
 
@@ -73,8 +80,7 @@ namespace vui::parser
     {
       bool is_integer = true, is_decimal = true;
 
-      CharT c{};
-      stream_ >> c;
+      CharT c{ skip_whitespace()};
       string_type s;
       while ((c != ')') && (c != EOF))
       {
@@ -89,6 +95,8 @@ namespace vui::parser
       if (c == EOF) return false;
       if (is_integer) out = std::stoi(s);
       else if (is_decimal) out = std::stod(s);
+      else if (s == "true") out = true;
+      else if (s == "false") out = false;
       else out = s;
       return true;
     }

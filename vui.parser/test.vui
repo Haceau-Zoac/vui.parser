@@ -1,1 +1,6 @@
-xxx{aaa(int),bb("char")}
+root {
+  item1(114514),
+  item2(191.981),
+  item3(false),
+  item4(qwq)
+}
