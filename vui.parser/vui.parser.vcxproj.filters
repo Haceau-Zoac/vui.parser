@@ -18,6 +18,9 @@
     <ClInclude Include="vui.parser.basic.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="vui.parser.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

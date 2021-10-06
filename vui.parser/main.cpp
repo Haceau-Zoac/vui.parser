@@ -3,8 +3,7 @@
 
 int main()
 {
-  auto obj = vui::parser::wparser(L"qwq{awa(owo)}");
-  std::wstring ret;
-  obj.get(L"awa", ret);
-  std::wcout << ret;
+  auto obj = vui::parser::wfparser(L"test.vui");
+  std::wstring out;
+  if (obj.get(L"aaa", out)) std::wcout << out;
 }
