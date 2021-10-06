@@ -143,11 +143,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="vui.parser.basic.h" />
+    <ClInclude Include="vui.parser.basic.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="vui.parser.basic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="test.vui" />

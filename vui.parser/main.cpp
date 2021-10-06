@@ -1,11 +1,10 @@
 #include <iostream>
-#include "vui.parser.basic.h"
+#include "vui.parser.hpp"
 
 int main()
 {
-  auto ret = vui::parser::basic::parse("test.vui");
-  std::cout << "Root: " << ret.first << std::endl;
-  std::cout << "Nodes: " << std::endl;
-  for (auto const& item : ret.second)
-    std::cout << "\tName: " << item.first << "\n\tValue: " << item.second << "\n\n";
+  auto obj = vui::parser::wparser(L"qwq{awa(owo)}");
+  std::wstring ret;
+  obj.get(L"awa", ret);
+  std::wcout << ret;
 }
