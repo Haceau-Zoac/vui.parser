@@ -1,6 +1,13 @@
-root {
-  item1(114514),
-  item2(191.981),
-  item3(false),
-  item4(qwq)
+##Hello
+Object {
+  d1(114),
+  d2(514)
 }
+###
+
+##World
+Object {
+  d1(1919),
+  d2(810)
+}
+###

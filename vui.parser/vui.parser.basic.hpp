@@ -22,10 +22,17 @@ namespace vui::parser
     using string_type = std::basic_string<CharT>;
     using object_type = std::pair<string_type, std::map<string_type, std::any>>;
 
-    basic_parser(ArgT const& s) noexcept
-      : stream_(StreamT(s)) { parse(); }
+    basic_parser(ArgT const& s, string_type const& region = "") noexcept
+      : stream_(s)
+      , region_(region) {
+      parse();
+    }
 
     string_type root() noexcept { return obj_.first; }
+
+    void set_region(string_type const& region) noexcept { region_ = region; }
+    string_type const& region() const noexcept { return region_; }
+    string_type& region() { return region_; }
 
     template <typename T = string_type>
     bool get(string_type const& key, T& result) noexcept
@@ -40,13 +47,62 @@ namespace vui::parser
   protected:
     StreamT stream_;
     object_type obj_;
+    string_type region_;
 
     bool parse() noexcept
     {
-      std::string obj;
+      CharT c{};
+      string_type obj;
+      while ((stream_ >> c) && c != EOF)
+      {
+        switch (c)
+        {
+        case '#': return parse_preprocessor();
+        default: return parse_object(c);
+        }
+      }
+      return false;
+    }
+
+    bool parse_preprocessor() noexcept
+    {
+      if (region_ == "") return true;
+
+      CharT c{};
+      bool is_region = false;
+      while (!is_region)
+      {
+        if (!(stream_ >> c) || c != '#') return false;
+        bool conti = false;
+        for (auto const& reg : region_)
+          if (!(stream_ >> c) || c != reg)
+          {
+            skip_to('#');
+            for (std::size_t i = 0; i < 3; ++i)
+              if (!(stream_ >> c) || c != '#') return false;
+            conti = true;
+            break;
+          }
+        if (conti) continue;
+        is_region = true;
+      }
+      c = skip_whitespace();
+      while (c != '#' && c != EOF)
+      {
+        parse_object(c);
+        stream_ >> c;
+      }
+      if (c == EOF) return false;
+      if (!(stream_ >> c) || c != '#') return false;
+      if (!(stream_ >> c) || c != '#') return false;
+      return true;
+    }
+
+    bool parse_object(CharT c) noexcept
+    {
+      string_type obj{ c };
       if (!read_to('{', obj)) return false;
       obj_.first = obj;
-      CharT c{};
       do
       {
         string_type first;
@@ -63,6 +119,12 @@ namespace vui::parser
       CharT c{};
       while ((stream_ >> c) && isspace(c));
       return c;
+    }
+
+    void skip_to(CharT end) noexcept
+    {
+      CharT c{};
+      while ((stream_ >> c) && c != end);
     }
 
     bool read_to(CharT end, string_type& out) noexcept
