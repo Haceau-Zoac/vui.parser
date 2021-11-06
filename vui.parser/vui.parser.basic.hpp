@@ -66,7 +66,7 @@ namespace vui::parser
 
     bool parse_preprocessor() noexcept
     {
-      if (region_ == "") return true;
+      if (region_.empty()) return true;
 
       CharT c{};
       bool is_region = false;
@@ -114,7 +114,7 @@ namespace vui::parser
       return true;
     }
 
-    char skip_whitespace() noexcept
+    CharT skip_whitespace() noexcept
     {
       CharT c{};
       while ((stream_ >> c) && isspace(c));
@@ -157,8 +157,8 @@ namespace vui::parser
       if (c == EOF) return false;
       if (is_integer) out = std::stoi(s);
       else if (is_decimal) out = std::stod(s);
-      else if (s == "true") out = true;
-      else if (s == "false") out = false;
+      else if (s.size() >= 4 && s[0] == 't' && s[1] == 'r' && s[2] == 'u' && s[3] == 'e') out = true;
+      else if (s.size() >= 5 && s[0] == 'f' && s[1] == 'a' && s[2] == 'l' && s[3] == 's' && s[4] == 'e') out = false;
       else out = s;
       return true;
     }

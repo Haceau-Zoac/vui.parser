@@ -3,8 +3,8 @@
 
 int main()
 {
-  auto obj = vui::parser::fparser("test.vui", "World");
+  auto obj = vui::parser::wfparser(L"test.vui", L"World");
   int i;
-  obj.get("d2", i);
+  obj.get(L"d2", i);
   std::cout << i;
 }
