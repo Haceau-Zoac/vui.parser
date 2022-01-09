@@ -8,6 +8,7 @@ Object {
 ##World
 Object {
   d1(1919),
-  d2(810)
+  d2(-853),
+  d3(giaogiao)
 }
 ###

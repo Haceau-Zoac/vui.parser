@@ -144,13 +144,18 @@ namespace vui::parser
 
       CharT c{ skip_whitespace()};
       string_type s;
+      bool is_negative{ false };
       while ((c != ')') && (c != EOF))
       {
         s += c;
         if (!isdigit(c))
         {
-          is_integer = false;
-          if (c != '.') is_decimal = false;
+          if (!is_negative && c == '-') is_negative = true;
+          else
+          {
+            is_integer = false;
+            if (c != '.') is_decimal = false;
+          }
         }
         stream_ >> c;
       }
