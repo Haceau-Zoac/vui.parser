@@ -1,3 +1,3 @@
 # vui.parser
 
-Îª [VertexUI](https://github.com/EnderMo/VertexUI) Ğ´µÄÒ»¸ö¼òÂªµÄ½âÎöÆ÷¡£
+ä¸º [VertexUI](https://github.com/EnderMo/VertexUI) å†™çš„ä¸€ä¸ªç®€é™‹çš„è§£æå™¨ã€‚
