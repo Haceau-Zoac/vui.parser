@@ -34,3 +34,5 @@
 Debug/
 Release/
 .vs/
+build/
+.xmake/
