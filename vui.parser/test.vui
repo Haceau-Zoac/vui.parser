@@ -1,14 +1,7 @@
-##Hello
 Object {
-  d1(114),
-  d2(514)
+  QAQ(12),
+  az("{()}"),
+  ch(char),
+  str(\"hello,\"),
+  astr("\"world!\"")
 }
-###
-
-##World
-Object {
-  d1(1919),
-  d2(-853),
-  d3(giaogiao)
-}
-###

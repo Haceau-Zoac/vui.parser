@@ -10,6 +10,7 @@
 #include <map>
 #include <locale>
 #include <functional>
+#include <iostream>
 
 namespace vui::parser
 {
@@ -22,9 +23,15 @@ namespace vui::parser
     using string_type = std::basic_string<CharT>;
     using object_type = std::pair<string_type, std::map<string_type, std::any>>;
 
-    basic_parser(ArgT const& s, string_type const& region = "") noexcept
+    basic_parser(ArgT const& s) noexcept
+    : stream_(s) 
+    {
+      parse();
+    }
+    basic_parser(ArgT const& s, string_type const& region) noexcept
       : stream_(s)
-      , region_(region) {
+      , region_(region)
+    {
       parse();
     }
 
@@ -110,7 +117,7 @@ namespace vui::parser
         std::any second;
         if (!read_value(second)) return false;
         obj_.second[first] = second;
-      } while ((stream_ >> c) && (c != '}'));
+      } while ((c = skip_whitespace()) != '}');
       return true;
     }
 
@@ -147,16 +154,27 @@ namespace vui::parser
       bool is_negative{ false };
       while ((c != ')') && (c != EOF))
       {
-        s += c;
         if (!isdigit(c))
         {
-          if (!is_negative && c == '-') is_negative = true;
+          if (c == '"')
+          {
+            if (s.back() != '\\') 
+            {
+              is_integer = is_decimal = false;
+              if (!read_string(s)) return false;
+            }
+            else 
+              s.back() = '"';
+            c = '\0';
+          }
+          else if (!is_negative && c == '-') is_negative = true;
           else
           {
             is_integer = false;
             if (c != '.') is_decimal = false;
           }
         }
+        s += c;
         stream_ >> c;
       }
       if (c == EOF) return false;
@@ -166,6 +184,18 @@ namespace vui::parser
       else if (s.size() >= 5 && s[0] == 'f' && s[1] == 'a' && s[2] == 'l' && s[3] == 's' && s[4] == 'e') out = false;
       else out = s;
       return true;
+    }
+
+    bool read_string(string_type& out) noexcept
+    {
+      CharT c{ };
+      stream_ >> c;
+      for (; (c != '"' || out.back() == '\\') && c != EOF; stream_ >> c)
+      {
+        if (c == '"') out.back() = '"';
+        else out += c;
+      }
+      return c != EOF;
     }
   };
 }

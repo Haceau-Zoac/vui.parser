@@ -4,11 +4,17 @@
 
 int main()
 {
-  auto obj = vui::parser::wfparser(L"test.vui", L"World");
+  auto obj = vui::parser::wfparser(L"test.vui");
   int i;
-  obj.get(L"d2", i);
-  std::cout << i;
-  std::wstring s;
-  obj.get(L"d3", s);
-  std::wcout << s;
+  obj.get(L"QAQ", i);
+  std::cout << "QAQ: " << i << '\n';
+  std::wstring az;
+  obj.get(L"az", az);
+  std::wcout << L"az: " << az << '\n';
+  obj.get(L"ch", az);
+  std::wcout << L"ch: " << az << '\n';
+  obj.get(L"str", az);
+  std::wcout << L"str: " << az << '\n';
+  obj.get(L"astr", az);
+  std::wcout << L"astr: " << az << '\n';
 }
