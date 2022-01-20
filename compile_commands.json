@@ -1,0 +1,6 @@
+[
+{
+  "directory": "D:\\Project\\vui.parser",
+  "arguments": ["D:\\Program\\Visual\\VC\\Tools\\MSVC\\14.31.30919\\bin\\HostX64\\x64\\cl.exe", "/c", "/EHsc", "/nologo", "/W3", "/WX", "/Ox", "/fp:fast", "/std:c++17", "/DNDEBUG", "/Fobuild\\.objs\\vui.parser-demo\\windows\\x64\\release\\vui.parser\\main.cpp.obj", "vui.parser\\main.cpp"],
+  "file": "vui.parser\\main.cpp"
+}]
