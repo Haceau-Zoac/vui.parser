@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _VUI_PARSER_HPP_
-#define _VUI_PARSER_HPP_
+#ifndef VUI_PARSER_HPP_
+#define VUI_PARSER_HPP_
 
 #include "vui.parser.basic.hpp"
 #include <fstream>
@@ -17,4 +17,4 @@ namespace vui::parser
   using wfparser = basic_parser<std::wfstream, std::wstring, wchar_t>;
 }
 
-#endif // _VUI_PARSER_HPP_
+#endif // VUI_PARSER_HPP_

@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _VUI_PARSER_H_
-#define _VUI_PARSET_H_
+#ifndef VUI_PARSER_H_
+#define VUI_PARSET_H_
 
 #include <cctype>
 #include <cinttypes>
@@ -200,4 +200,4 @@ namespace vui::parser
   };
 }
 
-#endif // _VUI_PARSET_H_
+#endif // VUI_PARSET_H_
