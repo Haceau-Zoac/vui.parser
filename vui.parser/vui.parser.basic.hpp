@@ -45,7 +45,7 @@ namespace vui::parser
     bool get(string_type const& key, T& result) noexcept
     {
       auto iter = obj_.second.find(key);
-      if (iter == obj_.second.end())
+      if (iter == obj_.second.end() || iter->second.type() != typeid(T))
         return false;
       result = std::any_cast<T>(iter->second);
       return true;
@@ -150,7 +150,7 @@ namespace vui::parser
       bool is_integer = true, is_decimal = true;
 
       CharT c{ skip_whitespace()};
-      string_type s;
+      string_type s{};
       bool is_negative{ false };
       while ((c != ')') && (c != EOF))
       {
@@ -178,7 +178,8 @@ namespace vui::parser
         stream_ >> c;
       }
       if (c == EOF) return false;
-      if (is_integer) out = std::stoi(s);
+      if (s.empty()) out = "";
+      else if (is_integer) out = std::stoi(s);
       else if (is_decimal) out = std::stod(s);
       else if (s.size() >= 4 && s[0] == 't' && s[1] == 'r' && s[2] == 'u' && s[3] == 'e') out = true;
       else if (s.size() >= 5 && s[0] == 'f' && s[1] == 'a' && s[2] == 'l' && s[3] == 's' && s[4] == 'e') out = false;

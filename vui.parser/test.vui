@@ -3,5 +3,5 @@ Object {
   az("{()}"),
   ch(char),
   str(\"hello,\"),
-  astr("\"world!\"")
+  astr()
 }
