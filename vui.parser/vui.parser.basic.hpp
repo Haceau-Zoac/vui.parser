@@ -1,11 +1,9 @@
 /**
  * @file vui.parser.basic.hpp
- * @author Haceau
- * @email haceau@qq.com
+ * @author Haceau (haceau@qq.com)
  * @brief vui 解析器的通用基本类。
  * @version 0.1.0
  * @date 2022-02-20
- * @license GNU General Public License v3.0
  * @copyright Copyright (c) 2022
  * 
  */
