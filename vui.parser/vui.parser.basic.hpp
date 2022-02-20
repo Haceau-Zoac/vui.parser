@@ -141,7 +141,7 @@ namespace vui::parser
     CharT skip_whitespace() noexcept
     {
       CharT c{};
-      while ((stream_ >> c) && isspace(c));
+      while ((stream_ >> c) && c <= 255 && isspace(c));
       return c;
     }
 
