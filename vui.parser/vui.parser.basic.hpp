@@ -7,57 +7,65 @@
 #include <algorithm>
 #include <any>
 #include <string>
-#include <map>
+#include <unordered_map>
 #include <locale>
 #include <functional>
 #include <iostream>
+#include <optional>
 
 namespace vui::parser
 {
-
   template <typename StreamT, typename ArgT, typename CharT>
   class basic_parser
   {
   public:
 
     using string_type = std::basic_string<CharT>;
-    using object_type = std::pair<string_type, std::map<string_type, std::any>>;
+    using object_type = std::unordered_map<string_type, std::any>;
 
     basic_parser(ArgT const& s) noexcept
-    : stream_(s) 
-    {
-      parse();
-    }
+    : stream_(s)  { }
     basic_parser(ArgT const& s, string_type const& region) noexcept
       : stream_(s)
-      , region_(region)
-    {
-      parse();
-    }
-
-    string_type root() noexcept { return obj_.first; }
+      , region_(region) { }
 
     void set_region(string_type const& region) noexcept { region_ = region; }
     string_type const& region() const noexcept { return region_; }
     string_type& region() { return region_; }
 
     template <typename T = string_type>
-    bool get(string_type const& key, T& result) noexcept
+    bool get(string_type const& key, T& result, std::optional<string_type> const& name = std::nullopt) noexcept
     {
-      auto iter = obj_.second.find(key);
-      if (iter == obj_.second.end() || iter->second.type() != typeid(T))
+      if (!objs_.has_value())
+      {
+        parse();
+      }
+      auto& objs{ objs_.value() };
+      object_type obj;
+      if (!name.has_value())
+        obj = objs.begin()->second;
+      else if (!objs.count(name.value()))
         return false;
-      result = std::any_cast<T>(iter->second);
+      else
+        obj = objs[name.value()];
+      
+      if (!obj.count(key))
+        return false;
+      std::any value{ obj[key] };
+      if (value.type() != typeid(T))
+        return false;
+      result = std::any_cast<T>(value);
       return true;
     }
 
   protected:
     StreamT stream_;
-    object_type obj_;
+    std::optional<std::unordered_map<string_type, object_type>> objs_;
     string_type region_;
 
     bool parse() noexcept
     {
+      objs_ = std::unordered_map<string_type, object_type>{};
       CharT c{};
       string_type obj;
       while ((stream_ >> c) && c != EOF)
@@ -65,7 +73,15 @@ namespace vui::parser
         switch (c)
         {
         case '#': return parse_preprocessor();
-        default: return parse_object(c);
+        default: {
+          if (!parse_object(c)) return false;
+          while ((c = skip_whitespace()) == ',')
+          {
+            stream_ >> c;
+            if (!parse_object(c)) return false;
+          }
+          return true;
+        }
         }
       }
       return false;
@@ -107,17 +123,18 @@ namespace vui::parser
 
     bool parse_object(CharT c) noexcept
     {
-      string_type obj{ c };
-      if (!read_to('{', obj)) return false;
-      obj_.first = obj;
+      string_type name{ c };
+      if (!read_to('{', name)) return false;
+      object_type obj;
       do
       {
         string_type first;
         if (!read_to('(', first)) return false;
         std::any second;
         if (!read_value(second)) return false;
-        obj_.second[first] = second;
+        obj[first] = second;
       } while ((c = skip_whitespace()) != '}');
+      objs_.value()[name] = obj;
       return true;
     }
 

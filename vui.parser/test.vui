@@ -4,4 +4,9 @@ Object {
   ch(char),
   str(\"hello,\"),
   astr()
+},
+AnotherObject {
+  Just(123),
+  Another("1145"),
+  Object(14.1919)
 }
