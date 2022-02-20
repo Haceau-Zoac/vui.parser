@@ -9,4 +9,5 @@ AnotherObject {
   Just(123),
   Another("1145"),
   Object(14.1919)
-}
+},
+AndThis {(

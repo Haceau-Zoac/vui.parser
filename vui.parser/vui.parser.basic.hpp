@@ -58,17 +58,12 @@ namespace vui::parser
       return true;
     }
 
-  protected:
-    StreamT stream_;
-    std::optional<std::unordered_map<string_type, object_type>> objs_;
-    string_type region_;
-
     bool parse() noexcept
     {
       objs_ = std::unordered_map<string_type, object_type>{};
       CharT c{};
       string_type obj;
-      while ((stream_ >> c) && c != EOF)
+      while ((!stream_.eof()) && (stream_ >> c))
       {
         switch (c)
         {
@@ -86,6 +81,12 @@ namespace vui::parser
       }
       return false;
     }
+
+
+  protected:
+    StreamT stream_;
+    std::optional<std::unordered_map<string_type, object_type>> objs_;
+    string_type region_;
 
     bool parse_preprocessor() noexcept
     {
@@ -110,12 +111,12 @@ namespace vui::parser
         is_region = true;
       }
       c = skip_whitespace();
-      while (c != '#' && c != EOF)
+      while (c != '#' && (!stream_.eof()))
       {
         parse_object(c);
         stream_ >> c;
       }
-      if (c == EOF) return false;
+      if (stream_.eof()) return false;
       if (!(stream_ >> c) || c != '#') return false;
       if (!(stream_ >> c) || c != '#') return false;
       return true;
@@ -154,12 +155,12 @@ namespace vui::parser
     bool read_to(CharT end, string_type& out) noexcept
     {
       CharT c{ skip_whitespace() };
-      while ((c != end) && (c != EOF))
+      while ((c != end) && (!stream_.eof()))
       {
         out += c;
         stream_ >> c;
       }
-      return c != EOF;
+      return !stream_.eof();
     }
 
     bool read_value(std::any& out) noexcept
@@ -169,7 +170,7 @@ namespace vui::parser
       CharT c{ skip_whitespace()};
       string_type s{};
       bool is_negative{ false };
-      while ((c != ')') && (c != EOF))
+      while ((c != ')') && (!stream_.eof()))
       {
         if (!isdigit(c))
         {
@@ -194,7 +195,7 @@ namespace vui::parser
         s += c;
         stream_ >> c;
       }
-      if (c == EOF) return false;
+      if (stream_.eof()) return false;
       if (s.empty()) out = "";
       else if (is_integer) out = std::stoi(s);
       else if (is_decimal) out = std::stod(s);
@@ -208,12 +209,12 @@ namespace vui::parser
     {
       CharT c{ };
       stream_ >> c;
-      for (; (c != '"' || out.back() == '\\') && c != EOF; stream_ >> c)
+      for (; (c != '"' || out.back() == '\\') && (!stream_.eof()); stream_ >> c)
       {
         if (c == '"') out.back() = '"';
         else out += c;
       }
-      return c != EOF;
+      return !stream_.eof();
     }
   };
 }
