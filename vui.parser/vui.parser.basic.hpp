@@ -1,3 +1,14 @@
+/**
+ * @file vui.parser.basic.hpp
+ * @author Haceau
+ * @email haceau@qq.com
+ * @brief vui 解析器的通用基本类。
+ * @version 0.1.0
+ * @date 2022-02-20
+ * @license GNU General Public License v3.0
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #pragma once
 #ifndef VUI_PARSER_H_
 #define VUI_PARSET_H_
@@ -15,24 +26,47 @@
 
 namespace vui::parser
 {
-  template <typename StreamT, typename ArgT, typename CharT>
+  ///
+  /// @class basic_parser<StreamT, ArgT, CharT> 
+  /// @brief 通用的 vui 格式解析类。
+  ///
+  template <typename StreamT, typename CharT>
   class basic_parser
   {
   public:
 
+    /// @brief 解析器使用的字符串类型。
     using string_type = std::basic_string<CharT>;
+    /// @brief 解析器使用的对象类型。
     using object_type = std::unordered_map<string_type, std::any>;
 
-    basic_parser(ArgT const& s) noexcept
+    /// @brief 初始化器。
+    /// @param s 要解析的流。
+    template<typename T>
+    basic_parser(T const& s) noexcept
     : stream_(s)  { }
-    basic_parser(ArgT const& s, string_type const& region) noexcept
+    /// @brief 初始化器。
+    /// @param s 要解析的流。
+    /// @param region 要解析的 region。
+    template<typename T>
+    basic_parser(T const& s, string_type const& region) noexcept
       : stream_(s)
       , region_(region) { }
 
+    /// @brief 设置 region。
+    /// @param region 要解析的 region。
     void set_region(string_type const& region) noexcept { region_ = region; }
+    /// @brief 获取 region。
+    /// @return 要解析的的 region。
     string_type const& region() const noexcept { return region_; }
-    string_type& region() { return region_; }
 
+    /// @brief 获取数据。
+    /// @param key 要获取的数据的名称。
+    /// @param result [返回] 获取到的数据。若获取失败，`result` 中的内容不改变。
+    /// @param name [可选] 要获取数据的对象的名称。默认为解析的第一个对象。
+    /// @return 成功返回 `true`，失败返回 `false`。
+    ///
+    /// 若在 `get` 前未进行过 `parse`，将会自动执行一次 `parse`。
     template <typename T = string_type>
     bool get(string_type const& key, T& result, std::optional<string_type> const& name = std::nullopt) noexcept
     {
@@ -58,6 +92,10 @@ namespace vui::parser
       return true;
     }
 
+    /// @brief 解析流中的数据。
+    /// @return 成功返回 `true`，失败返回 `false`。
+    /// 
+    /// 只能 `parse` 一次，多次 `parse` 将返回 `false`。
     bool parse() noexcept
     {
       objs_ = std::unordered_map<string_type, object_type>{};

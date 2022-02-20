@@ -1,0 +1,747 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>vui.parser: vui::parser::basic_parser&lt; StreamT, CharT &gt; 模板类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">vui.parser
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespacevui.html">vui</a></li><li class="navelem"><a class="el" href="namespacevui_1_1parser.html">parser</a></li><li class="navelem"><a class="el" href="classvui_1_1parser_1_1basic__parser.html">basic_parser</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public 类型</a> &#124;
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pro-methods">Protected 成员函数</a> &#124;
+<a href="#pro-attribs">Protected 属性</a> &#124;
+<a href="classvui_1_1parser_1_1basic__parser-members.html">所有成员列表</a>  </div>
+  <div class="headertitle"><div class="title">vui::parser::basic_parser&lt; StreamT, CharT &gt; 模板类 参考</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a92243f871e4eb6e4add9f79329f0e0c0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a> = std::basic_string&lt; CharT &gt;</td></tr>
+<tr class="memdesc:a92243f871e4eb6e4add9f79329f0e0c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">解析器使用的字符串类型。  <a href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">更多...</a><br /></td></tr>
+<tr class="separator:a92243f871e4eb6e4add9f79329f0e0c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfaa238f8d2198437b4823db31c85d78"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#acfaa238f8d2198437b4823db31c85d78">object_type</a> = std::unordered_map&lt; <a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a>, std::any &gt;</td></tr>
+<tr class="memdesc:acfaa238f8d2198437b4823db31c85d78"><td class="mdescLeft">&#160;</td><td class="mdescRight">解析器使用的对象类型。  <a href="classvui_1_1parser_1_1basic__parser.html#acfaa238f8d2198437b4823db31c85d78">更多...</a><br /></td></tr>
+<tr class="separator:acfaa238f8d2198437b4823db31c85d78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a395df5adb98a98355ea7a56646900b11"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a395df5adb98a98355ea7a56646900b11"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#a395df5adb98a98355ea7a56646900b11">basic_parser</a> (T const &amp;s) noexcept</td></tr>
+<tr class="memdesc:a395df5adb98a98355ea7a56646900b11"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化器。  <a href="classvui_1_1parser_1_1basic__parser.html#a395df5adb98a98355ea7a56646900b11">更多...</a><br /></td></tr>
+<tr class="separator:a395df5adb98a98355ea7a56646900b11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5664a69daf3659a420c0d9b5525f8bcd"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a5664a69daf3659a420c0d9b5525f8bcd"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#a5664a69daf3659a420c0d9b5525f8bcd">basic_parser</a> (T const &amp;s, <a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a> const &amp;<a class="el" href="classvui_1_1parser_1_1basic__parser.html#acc7a59bd3b9c311f9d70436bcf8430f0">region</a>) noexcept</td></tr>
+<tr class="memdesc:a5664a69daf3659a420c0d9b5525f8bcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化器。  <a href="classvui_1_1parser_1_1basic__parser.html#a5664a69daf3659a420c0d9b5525f8bcd">更多...</a><br /></td></tr>
+<tr class="separator:a5664a69daf3659a420c0d9b5525f8bcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68b10b00dfcb3cb50671ffffbee971d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#a68b10b00dfcb3cb50671ffffbee971d9">set_region</a> (<a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a> const &amp;<a class="el" href="classvui_1_1parser_1_1basic__parser.html#acc7a59bd3b9c311f9d70436bcf8430f0">region</a>) noexcept</td></tr>
+<tr class="memdesc:a68b10b00dfcb3cb50671ffffbee971d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置 region。  <a href="classvui_1_1parser_1_1basic__parser.html#a68b10b00dfcb3cb50671ffffbee971d9">更多...</a><br /></td></tr>
+<tr class="separator:a68b10b00dfcb3cb50671ffffbee971d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc7a59bd3b9c311f9d70436bcf8430f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a> const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#acc7a59bd3b9c311f9d70436bcf8430f0">region</a> () const noexcept</td></tr>
+<tr class="memdesc:acc7a59bd3b9c311f9d70436bcf8430f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取 region。  <a href="classvui_1_1parser_1_1basic__parser.html#acc7a59bd3b9c311f9d70436bcf8430f0">更多...</a><br /></td></tr>
+<tr class="separator:acc7a59bd3b9c311f9d70436bcf8430f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d5a5679dbc0e85cc5af96e8b4709a46"><td class="memTemplParams" colspan="2">template&lt;typename T  = string_type&gt; </td></tr>
+<tr class="memitem:a1d5a5679dbc0e85cc5af96e8b4709a46"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#a1d5a5679dbc0e85cc5af96e8b4709a46">get</a> (<a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a> const &amp;key, T &amp;result, std::optional&lt; <a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a> &gt; const &amp;name=std::nullopt) noexcept</td></tr>
+<tr class="memdesc:a1d5a5679dbc0e85cc5af96e8b4709a46"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取数据。  <a href="classvui_1_1parser_1_1basic__parser.html#a1d5a5679dbc0e85cc5af96e8b4709a46">更多...</a><br /></td></tr>
+<tr class="separator:a1d5a5679dbc0e85cc5af96e8b4709a46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86d61ac48a7aa7f61867b51d3da6601c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#a86d61ac48a7aa7f61867b51d3da6601c">parse</a> () noexcept</td></tr>
+<tr class="memdesc:a86d61ac48a7aa7f61867b51d3da6601c"><td class="mdescLeft">&#160;</td><td class="mdescRight">解析流中的数据。  <a href="classvui_1_1parser_1_1basic__parser.html#a86d61ac48a7aa7f61867b51d3da6601c">更多...</a><br /></td></tr>
+<tr class="separator:a86d61ac48a7aa7f61867b51d3da6601c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected 成员函数</h2></td></tr>
+<tr class="memitem:aa50ec7a4582486d7cf94530041b4845b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#aa50ec7a4582486d7cf94530041b4845b">parse_preprocessor</a> () noexcept</td></tr>
+<tr class="separator:aa50ec7a4582486d7cf94530041b4845b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8cfd3b5a90862f6ed37f35c37b80fb1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#ae8cfd3b5a90862f6ed37f35c37b80fb1">parse_object</a> (CharT c) noexcept</td></tr>
+<tr class="separator:ae8cfd3b5a90862f6ed37f35c37b80fb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b84149d67bee1d677c82e66fede1f75"><td class="memItemLeft" align="right" valign="top">CharT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#a2b84149d67bee1d677c82e66fede1f75">skip_whitespace</a> () noexcept</td></tr>
+<tr class="separator:a2b84149d67bee1d677c82e66fede1f75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdbaed9324da68a21f112c0d8e609cfc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#acdbaed9324da68a21f112c0d8e609cfc">skip_to</a> (CharT end) noexcept</td></tr>
+<tr class="separator:acdbaed9324da68a21f112c0d8e609cfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae355299028734f4dfb1a6473f8bd78d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#aae355299028734f4dfb1a6473f8bd78d">read_to</a> (CharT end, <a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a> &amp;out) noexcept</td></tr>
+<tr class="separator:aae355299028734f4dfb1a6473f8bd78d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9581e0713c7a788463c1f729dfbcd4b7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#a9581e0713c7a788463c1f729dfbcd4b7">read_value</a> (std::any &amp;out) noexcept</td></tr>
+<tr class="separator:a9581e0713c7a788463c1f729dfbcd4b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace27f57992125f462b758c5aef76d2a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#ace27f57992125f462b758c5aef76d2a1">read_string</a> (<a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a> &amp;out) noexcept</td></tr>
+<tr class="separator:ace27f57992125f462b758c5aef76d2a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected 属性</h2></td></tr>
+<tr class="memitem:a7a36bd7ff30581e5f1a3be520bb947b6"><td class="memItemLeft" align="right" valign="top">StreamT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#a7a36bd7ff30581e5f1a3be520bb947b6">stream_</a></td></tr>
+<tr class="separator:a7a36bd7ff30581e5f1a3be520bb947b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33eac8a304c2464b0d0a7480b6ed18ee"><td class="memItemLeft" align="right" valign="top">std::optional&lt; std::unordered_map&lt; <a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a>, <a class="el" href="classvui_1_1parser_1_1basic__parser.html#acfaa238f8d2198437b4823db31c85d78">object_type</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#a33eac8a304c2464b0d0a7480b6ed18ee">objs_</a></td></tr>
+<tr class="separator:a33eac8a304c2464b0d0a7480b6ed18ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82d1158b288d3a9b3067fd3583b4c28f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#a82d1158b288d3a9b3067fd3583b4c28f">region_</a></td></tr>
+<tr class="separator:a82d1158b288d3a9b3067fd3583b4c28f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename StreamT, typename CharT&gt;<br />
+class vui::parser::basic_parser&lt; StreamT, CharT &gt;</div>
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00034">34</a> 行定义.</p>
+</div><h2 class="groupheader">成员类型定义说明</h2>
+<a id="acfaa238f8d2198437b4823db31c85d78" name="acfaa238f8d2198437b4823db31c85d78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfaa238f8d2198437b4823db31c85d78">&#9670;&nbsp;</a></span>object_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename StreamT , typename CharT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classvui_1_1parser_1_1basic__parser.html">vui::parser::basic_parser</a>&lt; StreamT, CharT &gt;::object_type =  std::unordered_map&lt;<a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a>, std::any&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>解析器使用的对象类型。 </p>
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00041">41</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a92243f871e4eb6e4add9f79329f0e0c0" name="a92243f871e4eb6e4add9f79329f0e0c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92243f871e4eb6e4add9f79329f0e0c0">&#9670;&nbsp;</a></span>string_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename StreamT , typename CharT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classvui_1_1parser_1_1basic__parser.html">vui::parser::basic_parser</a>&lt; StreamT, CharT &gt;::string_type =  std::basic_string&lt;CharT&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>解析器使用的字符串类型。 </p>
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00039">39</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">构造及析构函数说明</h2>
+<a id="a395df5adb98a98355ea7a56646900b11" name="a395df5adb98a98355ea7a56646900b11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a395df5adb98a98355ea7a56646900b11">&#9670;&nbsp;</a></span>basic_parser() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename StreamT , typename CharT &gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvui_1_1parser_1_1basic__parser.html">vui::parser::basic_parser</a>&lt; StreamT, CharT &gt;::basic_parser </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>初始化器。 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>要解析的流。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00046">46</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5664a69daf3659a420c0d9b5525f8bcd" name="a5664a69daf3659a420c0d9b5525f8bcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5664a69daf3659a420c0d9b5525f8bcd">&#9670;&nbsp;</a></span>basic_parser() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename StreamT , typename CharT &gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvui_1_1parser_1_1basic__parser.html">vui::parser::basic_parser</a>&lt; StreamT, CharT &gt;::basic_parser </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a> const &amp;&#160;</td>
+          <td class="paramname"><em>region</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>初始化器。 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>要解析的流。 </td></tr>
+    <tr><td class="paramname">region</td><td>要解析的 region。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00052">52</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">成员函数说明</h2>
+<a id="a1d5a5679dbc0e85cc5af96e8b4709a46" name="a1d5a5679dbc0e85cc5af96e8b4709a46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d5a5679dbc0e85cc5af96e8b4709a46">&#9670;&nbsp;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename StreamT , typename CharT &gt; </div>
+<div class="memtemplate">
+template&lt;typename T  = string_type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classvui_1_1parser_1_1basic__parser.html">vui::parser::basic_parser</a>&lt; StreamT, CharT &gt;::get </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a> const &amp;&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>result</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::optional&lt; <a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>name</em> = <code>std::nullopt</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取数据。 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要获取的数据的名称。 </td></tr>
+    <tr><td class="paramname">result</td><td>[返回] 获取到的数据。若获取失败，<code>result</code> 中的内容不改变。 </td></tr>
+    <tr><td class="paramname">name</td><td>[可选] 要获取数据的对象的名称。默认为解析的第一个对象。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>成功返回 <code>true</code>，失败返回 <code>false</code>。</dd></dl>
+<p>若在 <code>get</code> 前未进行过 <code>parse</code>，将会自动执行一次 <code>parse</code>。 </p>
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00071">71</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a86d61ac48a7aa7f61867b51d3da6601c" name="a86d61ac48a7aa7f61867b51d3da6601c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86d61ac48a7aa7f61867b51d3da6601c">&#9670;&nbsp;</a></span>parse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename StreamT , typename CharT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classvui_1_1parser_1_1basic__parser.html">vui::parser::basic_parser</a>&lt; StreamT, CharT &gt;::parse </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>解析流中的数据。 </p>
+<dl class="section return"><dt>返回</dt><dd>成功返回 <code>true</code>，失败返回 <code>false</code>。</dd></dl>
+<p>只能 <code>parse</code> 一次，多次 <code>parse</code> 将返回 <code>false</code>。 </p>
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00099">99</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ae8cfd3b5a90862f6ed37f35c37b80fb1" name="ae8cfd3b5a90862f6ed37f35c37b80fb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8cfd3b5a90862f6ed37f35c37b80fb1">&#9670;&nbsp;</a></span>parse_object()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename StreamT , typename CharT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classvui_1_1parser_1_1basic__parser.html">vui::parser::basic_parser</a>&lt; StreamT, CharT &gt;::parse_object </td>
+          <td>(</td>
+          <td class="paramtype">CharT&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00163">163</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aa50ec7a4582486d7cf94530041b4845b" name="aa50ec7a4582486d7cf94530041b4845b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa50ec7a4582486d7cf94530041b4845b">&#9670;&nbsp;</a></span>parse_preprocessor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename StreamT , typename CharT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classvui_1_1parser_1_1basic__parser.html">vui::parser::basic_parser</a>&lt; StreamT, CharT &gt;::parse_preprocessor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00129">129</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ace27f57992125f462b758c5aef76d2a1" name="ace27f57992125f462b758c5aef76d2a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace27f57992125f462b758c5aef76d2a1">&#9670;&nbsp;</a></span>read_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename StreamT , typename CharT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classvui_1_1parser_1_1basic__parser.html">vui::parser::basic_parser</a>&lt; StreamT, CharT &gt;::read_string </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00246">246</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aae355299028734f4dfb1a6473f8bd78d" name="aae355299028734f4dfb1a6473f8bd78d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae355299028734f4dfb1a6473f8bd78d">&#9670;&nbsp;</a></span>read_to()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename StreamT , typename CharT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classvui_1_1parser_1_1basic__parser.html">vui::parser::basic_parser</a>&lt; StreamT, CharT &gt;::read_to </td>
+          <td>(</td>
+          <td class="paramtype">CharT&#160;</td>
+          <td class="paramname"><em>end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00193">193</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9581e0713c7a788463c1f729dfbcd4b7" name="a9581e0713c7a788463c1f729dfbcd4b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9581e0713c7a788463c1f729dfbcd4b7">&#9670;&nbsp;</a></span>read_value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename StreamT , typename CharT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classvui_1_1parser_1_1basic__parser.html">vui::parser::basic_parser</a>&lt; StreamT, CharT &gt;::read_value </td>
+          <td>(</td>
+          <td class="paramtype">std::any &amp;&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00204">204</a> 行定义.</p>
+
+</div>
+</div>
+<a id="acc7a59bd3b9c311f9d70436bcf8430f0" name="acc7a59bd3b9c311f9d70436bcf8430f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc7a59bd3b9c311f9d70436bcf8430f0">&#9670;&nbsp;</a></span>region()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename StreamT , typename CharT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a> const  &amp; <a class="el" href="classvui_1_1parser_1_1basic__parser.html">vui::parser::basic_parser</a>&lt; StreamT, CharT &gt;::region </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取 region。 </p>
+<dl class="section return"><dt>返回</dt><dd>要解析的的 region。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00061">61</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a68b10b00dfcb3cb50671ffffbee971d9" name="a68b10b00dfcb3cb50671ffffbee971d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68b10b00dfcb3cb50671ffffbee971d9">&#9670;&nbsp;</a></span>set_region()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename StreamT , typename CharT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classvui_1_1parser_1_1basic__parser.html">vui::parser::basic_parser</a>&lt; StreamT, CharT &gt;::set_region </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a> const &amp;&#160;</td>
+          <td class="paramname"><em>region</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置 region。 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">region</td><td>要解析的 region。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00058">58</a> 行定义.</p>
+
+</div>
+</div>
+<a id="acdbaed9324da68a21f112c0d8e609cfc" name="acdbaed9324da68a21f112c0d8e609cfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdbaed9324da68a21f112c0d8e609cfc">&#9670;&nbsp;</a></span>skip_to()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename StreamT , typename CharT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classvui_1_1parser_1_1basic__parser.html">vui::parser::basic_parser</a>&lt; StreamT, CharT &gt;::skip_to </td>
+          <td>(</td>
+          <td class="paramtype">CharT&#160;</td>
+          <td class="paramname"><em>end</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00187">187</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2b84149d67bee1d677c82e66fede1f75" name="a2b84149d67bee1d677c82e66fede1f75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b84149d67bee1d677c82e66fede1f75">&#9670;&nbsp;</a></span>skip_whitespace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename StreamT , typename CharT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CharT <a class="el" href="classvui_1_1parser_1_1basic__parser.html">vui::parser::basic_parser</a>&lt; StreamT, CharT &gt;::skip_whitespace </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00180">180</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">类成员变量说明</h2>
+<a id="a33eac8a304c2464b0d0a7480b6ed18ee" name="a33eac8a304c2464b0d0a7480b6ed18ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33eac8a304c2464b0d0a7480b6ed18ee">&#9670;&nbsp;</a></span>objs_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename StreamT , typename CharT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt;std::unordered_map&lt;<a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a>, <a class="el" href="classvui_1_1parser_1_1basic__parser.html#acfaa238f8d2198437b4823db31c85d78">object_type</a>&gt; &gt; <a class="el" href="classvui_1_1parser_1_1basic__parser.html">vui::parser::basic_parser</a>&lt; StreamT, CharT &gt;::objs_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00126">126</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a82d1158b288d3a9b3067fd3583b4c28f" name="a82d1158b288d3a9b3067fd3583b4c28f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82d1158b288d3a9b3067fd3583b4c28f">&#9670;&nbsp;</a></span>region_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename StreamT , typename CharT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvui_1_1parser_1_1basic__parser.html#a92243f871e4eb6e4add9f79329f0e0c0">string_type</a> <a class="el" href="classvui_1_1parser_1_1basic__parser.html">vui::parser::basic_parser</a>&lt; StreamT, CharT &gt;::region_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00127">127</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7a36bd7ff30581e5f1a3be520bb947b6" name="a7a36bd7ff30581e5f1a3be520bb947b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a36bd7ff30581e5f1a3be520bb947b6">&#9670;&nbsp;</a></span>stream_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename StreamT , typename CharT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">StreamT <a class="el" href="classvui_1_1parser_1_1basic__parser.html">vui::parser::basic_parser</a>&lt; StreamT, CharT &gt;::stream_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00125">125</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>
