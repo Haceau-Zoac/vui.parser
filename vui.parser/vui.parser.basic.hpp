@@ -65,6 +65,7 @@ namespace vui::parser
     /// @return 成功返回 `true`，失败返回 `false`。
     ///
     /// 若在 `get` 前未进行过 `parse`，将会自动执行一次 `parse`。
+    /// 同名对象可使用 `same_name_object` 函数进行名称处理。
     template <typename T = string_type>
     bool get(string_type const& key, T& result, std::optional<string_type> const& name = std::nullopt) noexcept
     {
@@ -253,6 +254,16 @@ namespace vui::parser
       return !stream_.eof();
     }
   };
+
+  /// @brief 为同名对象创建标识符。
+  /// @param object_name 对象名。
+  /// @param id 同名对象的唯一标识符。
+  /// @param split 对象名与标识符的分隔符。默认为 `:`。
+  template<typename C>
+  std::basic_string<C> same_name_object(std::basic_string<C> object_name, std::basic_string<C> id, C split = ':')
+  {
+    return object_name + split + id;
+  }
 }
 
 #endif // VUI_PARSET_H_

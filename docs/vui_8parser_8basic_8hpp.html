@@ -68,7 +68,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">类</a> &#124;
-<a href="#define-members">宏定义</a>  </div>
+<a href="#define-members">宏定义</a> &#124;
+<a href="#func-members">函数</a>  </div>
   <div class="headertitle"><div class="title">vui.parser.basic.hpp 文件参考</div></div>
 </div><!--header-->
 <div class="contents">
@@ -92,6 +93,13 @@ $(function() {
 类</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvui_1_1parser_1_1basic__parser.html">vui::parser::basic_parser&lt; StreamT, CharT &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:a31d57ba75d69261d64cea01b2fa9b306"><td class="memTemplParams" colspan="2">template&lt;typename C &gt; </td></tr>
+<tr class="memitem:a31d57ba75d69261d64cea01b2fa9b306"><td class="memTemplItemLeft" align="right" valign="top">std::basic_string&lt; C &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="vui_8parser_8basic_8hpp.html#a31d57ba75d69261d64cea01b2fa9b306">vui::parser::same_name_object</a> (std::basic_string&lt; C &gt; object_name, std::basic_string&lt; C &gt; id, C split=':')</td></tr>
+<tr class="memdesc:a31d57ba75d69261d64cea01b2fa9b306"><td class="mdescLeft">&#160;</td><td class="mdescRight">为同名对象创建标识符。  <a href="vui_8parser_8basic_8hpp.html#a31d57ba75d69261d64cea01b2fa9b306">更多...</a><br /></td></tr>
+<tr class="separator:a31d57ba75d69261d64cea01b2fa9b306"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
 <div class="textblock"><p >vui 解析器的通用基本类。 </p>
@@ -99,7 +107,75 @@ $(function() {
 <dl class="section version"><dt>版本</dt><dd>0.1.0 </dd></dl>
 <dl class="section date"><dt>日期</dt><dd>2022-02-20 </dd></dl>
 <dl class="section copyright"><dt>版权所有</dt><dd>Copyright (c) 2022 </dd></dl>
-</div></div><!-- contents -->
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 中定义.</p>
+</div><h2 class="groupheader">宏定义说明</h2>
+<a id="a11a443bcf77eae86e3f28d0d951c6682" name="a11a443bcf77eae86e3f28d0d951c6682"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11a443bcf77eae86e3f28d0d951c6682">&#9670;&nbsp;</a></span>VUI_PARSET_H_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VUI_PARSET_H_</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00012">12</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">函数说明</h2>
+<a id="a31d57ba75d69261d64cea01b2fa9b306" name="a31d57ba75d69261d64cea01b2fa9b306"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31d57ba75d69261d64cea01b2fa9b306">&#9670;&nbsp;</a></span>same_name_object()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::basic_string&lt; C &gt; vui::parser::same_name_object </td>
+          <td>(</td>
+          <td class="paramtype">std::basic_string&lt; C &gt;&#160;</td>
+          <td class="paramname"><em>object_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::basic_string&lt; C &gt;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">C&#160;</td>
+          <td class="paramname"><em>split</em> = <code>':'</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>为同名对象创建标识符。 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">object_name</td><td>对象名。 </td></tr>
+    <tr><td class="paramname">id</td><td>同名对象的唯一标识符。 </td></tr>
+    <tr><td class="paramname">split</td><td>对象名与标识符的分隔符。默认为 <code>:</code>。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="vui_8parser_8basic_8hpp_source.html">vui.parser.basic.hpp</a> 第 <a class="el" href="vui_8parser_8basic_8hpp_source.html#l00263">263</a> 行定义.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3

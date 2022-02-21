@@ -1,7 +1,7 @@
 add_rules("mode.debug", "mode.release")
 
 target("vui.parser-demo")
-    set_warnings("all", "error")
+    set_warnings("all")
     set_languages("cxx17")
     set_kind("binary")
     add_files("vui.parser/*.cpp")

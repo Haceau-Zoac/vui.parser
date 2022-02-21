@@ -5,6 +5,9 @@ Object {
   str(\"hello,\"),
   astr()
 },
+Object:qwq {
+  QWQ(11)
+},
 AnotherObject {
   Just(123),
   Another("1145"),

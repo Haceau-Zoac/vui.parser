@@ -1,11 +1,12 @@
 #include <iostream>
 #include <string>
 #include "vui.parser.hpp"
+using namespace vui::parser;
 
 int main()
 {
   {
-    auto obj = vui::parser::wfparser(L"test1.vui");
+    auto obj = wfparser(L"test1.vui");
     std::cout << "Parse " << (obj.parse() ? "succeeded" : "failed") << ".\n";
     {
       std::wstring az;
@@ -28,6 +29,12 @@ int main()
       } else {
         std::cout << "astr: Get failed.\n";
       }
+    }
+    std::cout << '\n';
+    {
+      int i;
+      obj.get(L"QWQ", i, same_name_object<wchar_t>(L"Object", L"qwq"));
+      std::wcout << L"QWQ:" << i << '\n';
     }
     std::cout << '\n';
     {
