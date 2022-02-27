@@ -4,13 +4,13 @@ Object {
   ch(char),
   str(\"hello,\"),
   astr()
-},
+}
 Object:qwq {
   QWQ(11)
-},
+}
 AnotherObject {
   Just(123),
   Another("1145"),
   Object(14.1919)
-},
+}
 AndThis {(

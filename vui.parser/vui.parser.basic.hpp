@@ -107,9 +107,8 @@ namespace vui::parser
         case '#': return parse_preprocessor();
         default: {
           if (!parse_object(c)) return false;
-          while ((c = skip_whitespace()) == ',')
+          while ((c = skip_whitespace()) && !(stream_.eof()))
           {
-            stream_ >> c;
             if (!parse_object(c)) return false;
           }
           return true;
