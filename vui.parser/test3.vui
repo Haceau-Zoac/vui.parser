@@ -1,0 +1,6 @@
+@header.Window{cx(400),cy(300),color("RGB(244,244,244)"),name("qwq")}
+Rect{x(0),y(0),cx(50),cy(-1),Gradient("45;RGB(255,196,13);RGB(255,0,151)")}
+Rect{x(50),y(0),cx(50),cy(-1),Gradient("45;RGB(247,78,104);RGB(111,203,248)")}
+Rect{x(0),y(0),cx(100),cy(-1),Blur("Info(6,4,1)")}
+//Rect:4{x(200),y(0),cx(60),cy(60),color("RGB(255,64,129)")}
+//Rect:5{x(260),y(0),cx(60),cy(60),color("RGB(108,92,200)")}

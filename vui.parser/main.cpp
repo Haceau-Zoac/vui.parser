@@ -56,4 +56,22 @@ int main()
     auto obj = vui::parser::wfparser(L"test2.vui");
     std::cout << "Parse " << (obj.parse() ? "succeeded" : "failed") << ".\n";
   }
+  std::cout << "\n\n";
+  {
+    auto parser = vui::parser::wfparser(L"test3.vui");
+    parser.parse();
+    for (auto obj : parser)
+    {
+      std::wcout << '\n' << obj.name() << " {";
+      for (auto pair : obj)
+      {
+        std::wcout << "\n  " << pair.name() << L"(";
+        std::wstring ws;
+        if (!pair.get(ws)) std::wcout << L"!not a string!";
+        else std::wcout << ws;
+        std::wcout << L"),";
+      }
+      std::wcout << L"\b\n}";
+    }
+  }
 }

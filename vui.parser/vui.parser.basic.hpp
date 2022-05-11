@@ -3,11 +3,13 @@
  * @author Haceau (haceau@qq.com)
  * @brief vui 解析器的通用基本类。
  * @version 0.1.0
- * @date 2022-02-20
+ * @date 2022-05-11
  * @copyright Copyright (c) 2022
  * 
  */
 #pragma once
+#include <iterator>
+#include <utility>
 #ifndef VUI_PARSER_H_
 #define VUI_PARSET_H_
 
@@ -25,8 +27,187 @@
 namespace vui::parser
 {
   ///
-  /// @class basic_parser<StreamT, ArgT, CharT> 
+  /// @class basic_value_pair <CharT>
+  /// @brief 通用的 vui 键值对类。
+  /// @param CharT [类型] 字符类型。
+  ///
+  template <typename CharT>
+  class basic_value_pair
+  {
+  public:
+    /// @brief 字符串类型。
+    using string_type = std::basic_string<CharT>;
+    /// @brief 原始类型。
+    using raw_type = std::pair<string_type const, std::any>;
+
+    /// @brief 初始化器。
+    basic_value_pair(raw_type const& pair)
+      : pair_(pair) { }
+
+    /// @brief 获取数据。
+    /// @param T [可选|类型] 获取的类型，默认为 `string_type`。
+    /// @param result [返回] 获取到的数据。若获取失败，`result` 中的内容不改变。
+    /// @return 成功返回 `true`，失败返回 `false`。
+    template <typename T = string_type>
+    bool get(T& result) const
+    {
+      std::any value{ pair_.second };
+      if (value.type() != typeid(T) && value.type() != typeid(string_type))
+        return false;
+      result = std::any_cast<T>(value);
+      return true;
+    }
+
+    /// @brief 获取名称。
+    /// @return 名称。
+    string_type name() const
+    {
+      return pair_.first;
+    }
+
+  private:
+    raw_type pair_;
+  };
+
+  ///
+  /// @class basic_object <CharT>
+  /// @brief 通用的 vui 对象类。
+  /// @param CharT 字符类型。
+  ///
+  template <typename CharT>
+  class basic_object
+  {
+  public:
+    /// @brief 对象使用的字符串类型。
+    using string_type = std::basic_string<CharT>;
+    /// @brief 原始对象类型。
+    using object_type = std::unordered_map<string_type, std::any>;
+    
+    basic_object() {}
+    basic_object(std::pair<string_type, basic_object<CharT>> const& pair)
+      : obj_(pair.second.obj_), name_(pair.first)
+    {
+      name_.erase(std::remove(name_.begin(), name_.end(), '^'),
+        name_.end());
+    }
+    basic_object(std::pair<string_type, basic_object<CharT>> const& pair, std::vector<string_type> const& order)
+      : basic_object(pair) { order_ = order; }
+
+    /// @brief 对象的迭代器。
+    class iterator
+    {
+      friend class basic_object<CharT>;
+    public:
+      /// @brief 值类型。
+      using value_type = basic_value_pair<CharT>;
+      /// @brief 引用类型。
+      using reference = value_type&;
+      /// @brief 指针类型。
+      using pointer = value_type*;
+
+      iterator(object_type& objs, std::vector<string_type> const& order)
+        : objs_(objs), order_(order) { }
+      /// @brief 获取 vui 键值对。
+      value_type operator*() { string_type name{ order_[pos_] }; return std::make_pair(name, objs_[name]); } const
+      /// @brief 向前移动一位。
+      iterator& operator++() { ++pos_; return *this; }
+      /// @brief 向前移动一位，返回移动前的迭代器。
+      iterator const& operator++(int) { auto it{ *this }; ++*this; return it; }
+      /// @brief 向后移动一位。
+      iterator& operator--() { --pos_; return *this; }
+      /// @brief 向后移动一位，返回移动前的迭代器。
+      iterator const& operator--(int) { auto it{ *this }; --*this; return *this; }
+      /// @brief 判断两个迭代器是否相等。
+      bool operator==(iterator const& other) { return objs_.begin() == other.objs_.begin() && objs_.end() == other.objs_.end() && pos_ == other.pos_; }
+      /// @brief 判断两个迭代器是否不相等。
+      bool operator!=(iterator const& other) { return !(*this == other); }
+      /// @brief 访问对象。
+      reference operator->() { return **this; }
+
+    private:
+      object_type& objs_;
+      std::vector<string_type> const& order_;
+      std::size_t pos_{ 0 };
+    };
+
+    /// @brief 获取对象的起始迭代器。
+    /// @return 对象的起始迭代器。
+    iterator begin()
+    {
+      return { obj_, order_ };
+    }
+
+    /// @brief 获取对象的结束迭代器。
+    /// @return 对象的结束迭代器。
+    iterator end()
+    {
+      iterator it(obj_, order_);
+      it.pos_ = order_.size();
+      return it;
+    }
+
+    /// @brief 获取对象中键为 `key` 的值的个数。
+    /// @param key 要获取的键。
+    auto count(string_type const& key) const
+    {
+      return obj_.count(key);
+    }
+
+    /// @brief 获取对象名。
+    string_type name() const { return name_; };
+
+    /// @brief 访问对象。
+    /// @param key 要访问的键。
+    std::any const& operator[](string_type const& key) const
+    {
+      return obj_[key];
+    }
+
+    /// @brief 访问对象。
+    /// @param key 要访问的键。
+    std::any& operator[](string_type const& key)
+    {
+      return obj_[key];
+    }
+
+    /// @brief 添加对象。
+    void add(string_type const& key, std::any& value)
+    {
+      obj_[key] = value;
+      order_.emplace_back(std::move(key));
+    }
+
+    /// @brief 获取数据顺序。
+    std::vector<string_type> const& order() const
+    {
+      return order_;
+    }
+
+    /// @brief 判断两个对象是否相等。
+    /// @param other 要判断的对象。
+    /// @return 相等返回 `true`，不相等返回 `false`。
+    bool operator==(object_type const& other) { return name_ == other.name_ && obj_ == other.obj_; }
+    /// @brief 判断两个对象是否不相等。
+    /// @param other 要判断的对象。
+    /// @return 相等返回 `false`，不相等返回 `true`。
+    bool operator!=(object_type const& other) { return !(*this == other); }
+  
+  private:
+    string_type name_;
+    object_type obj_;
+    std::vector<string_type> order_;
+
+  public:
+    /// @brief 初始化器。
+    basic_object(object_type&& obj)
+      : obj_(obj) { }
+  };
+
+  ///
+  /// @class basic_parser <StreamT, ArgT, CharT> 
   /// @brief 通用的 vui 格式解析类。
+  /// @param StreamT 流类型。
+  /// @param CharT 字符类型。
   ///
   template <typename StreamT, typename CharT>
   class basic_parser
@@ -36,7 +217,9 @@ namespace vui::parser
     /// @brief 解析器使用的字符串类型。
     using string_type = std::basic_string<CharT>;
     /// @brief 解析器使用的对象类型。
-    using object_type = std::unordered_map<string_type, std::any>;
+    using object_type = basic_object<CharT>;
+    /// @brief 对象表。
+    using objects_type = std::unordered_map<string_type, object_type>;
 
     /// @brief 初始化器。
     /// @param s 要解析的流。
@@ -95,6 +278,7 @@ namespace vui::parser
     /// @return 成功返回 `true`，失败返回 `false`。
     /// 
     /// 只能 `parse` 一次，多次 `parse` 将返回 `false`。
+    /// 对象名禁用 「^」。
     bool parse() noexcept
     {
       objs_ = std::unordered_map<string_type, object_type>{};
@@ -118,10 +302,66 @@ namespace vui::parser
       return false;
     }
 
+    /// @brief 对象的迭代器。
+    class iterator
+    {
+      friend class basic_parser<StreamT, CharT>;
+    public:
+      /// @brief 值类型。
+      using value_type = object_type;
+      /// @brief 引用类型。
+      using reference = value_type&;
+      /// @brief 指针类型。
+      using pointer = value_type*;
+
+      /// @brief 获取 vui 对象。
+      value_type operator*() { string_type name{ order_[pos_] }; return { std::make_pair(name, objs_[name]), objs_[name].order() }; } const
+      /// @brief 向前移动一位。
+      iterator& operator++() { ++pos_; return *this; }
+      /// @brief 向前移动一位，返回移动前的迭代器。
+      iterator const& operator++(int) { auto it{ *this }; ++*this; return it; }
+      /// @brief 向后移动一位。
+      iterator& operator--() { --pos_; return *this; }
+      /// @brief 向后移动一位，返回移动前的迭代器。
+      iterator const& operator--(int) { auto it{ *this }; --*this; return *this; }
+      /// @brief 判断两个迭代器是否相等。
+      bool operator==(iterator const& other) { return objs_.begin() == other.objs_.begin() && objs_.end() == other.objs_.end() && pos_ == other.pos_; }
+      /// @brief 判断两个迭代器是否不相等。
+      bool operator!=(iterator const& other) { return !(*this == other); }
+      /// @brief 访问对象。
+      reference operator->() { return **this; }
+
+      iterator(std::unordered_map<string_type, object_type>& objs, std::vector<string_type> const& order)
+        : objs_(objs), order_(order) { }
+
+    private:
+      std::unordered_map<string_type, object_type>& objs_;
+      std::vector<string_type> const& order_;
+      std::size_t pos_{ 0 };
+
+      bool end() { return pos_ >= order_.size(); }
+    };
+
+    /// @brief 获取对象的起始迭代器。
+    /// @return 对象的起始迭代器。
+    iterator begin()
+    {
+      return { objs_.value(), order_ };
+    }
+
+    /// @brief 获取对象的结束迭代器。
+    /// @return 对象的结束迭代器。
+    iterator end()
+    {
+      iterator it(objs_.value(), order_);
+      it.pos_ = it.order_.size();
+      return it;
+    }
 
   protected:
     StreamT stream_;
-    std::optional<std::unordered_map<string_type, object_type>> objs_;
+    std::optional<objects_type> objs_;
+    std::vector<string_type> order_;
     string_type region_;
 
     bool parse_preprocessor() noexcept
@@ -169,9 +409,12 @@ namespace vui::parser
         if (!read_to('(', first)) return false;
         std::any second;
         if (!read_value(second)) return false;
-        obj[first] = second;
+        obj.add(first, second);
       } while ((c = skip_whitespace()) != '}');
+      while (objs_->count(name)) name += '^';
       objs_.value()[name] = obj;
+      if (!is_virtual_object(name))
+        order_.emplace_back(std::move(name));
       return true;
     }
 
@@ -262,6 +505,19 @@ namespace vui::parser
   std::basic_string<C> same_name_object(std::basic_string<C> object_name, std::basic_string<C> id, C split = ':')
   {
     return object_name + split + id;
+  }
+
+    
+  /// @brief 判断是否为虚对象。
+  /// @param C [类型] 字符类型。
+  /// @param object_name 对象名。
+  /// @return 是虚对象返回 `true`，不是返回 `false`。
+  /// 
+  /// 以「$」或「@」开头的对象为「虚对象」。
+  template<typename C>
+  bool is_virtual_object(std::basic_string<C> object_name)
+  {
+    return object_name[0] == '$' || object_name[0] == '@';
   }
 }
 
