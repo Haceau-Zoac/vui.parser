@@ -458,7 +458,8 @@ namespace vui::parser
             if (s.back() != '\\') 
             {
               is_integer = is_decimal = false;
-              if (!read_string(s)) return false;
+              bool flag = false;
+              if (!read_string(s, flag)) return false; else if (flag) break;
             }
             else 
               s.back() = '"';
@@ -484,13 +485,17 @@ namespace vui::parser
       return true;
     }
 
-    bool read_string(string_type& out) noexcept
+    bool read_string(string_type& out, bool& flag) noexcept
     {
       CharT c{ };
       stream_ >> c;
       for (; (c != '"' || out.back() == '\\') && (!stream_.eof()); stream_ >> c)
       {
-        if (c == '"') out.back() = '"';
+        if (c == '"') {
+stream_ >> c;
+if (c == ')') { flag = true; break; }
+else out.back() = '"';
+}
         else out += c;
       }
       return !stream_.eof();
