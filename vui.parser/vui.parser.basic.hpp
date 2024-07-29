@@ -108,7 +108,7 @@ namespace vui::parser
       iterator(object_type& objs, std::vector<string_type> const& order)
         : objs_(objs), order_(order) { }
       /// @brief 获取 vui 键值对。
-      value_type operator*() { string_type name{ order_[pos_] }; return std::make_pair(name, objs_[name]); } const
+      value_type operator*() { string_type name{ order_[pos_] }; return value_type(std::make_pair(name, objs_[name])); } const
       /// @brief 向前移动一位。
       iterator& operator++() { ++pos_; return *this; }
       /// @brief 向前移动一位，返回移动前的迭代器。
@@ -171,7 +171,7 @@ namespace vui::parser
     }
 
     /// @brief 添加对象。
-    void add(string_type const& key, std::any& value)
+    void add(string_type const& key, std::any const& value)
     {
       obj_[key] = value;
       order_.emplace_back(std::move(key));
@@ -181,6 +181,24 @@ namespace vui::parser
     std::vector<string_type> const& order() const
     {
       return order_;
+    }
+    
+    /// @brief 获取数据。
+    /// @param key 要获取的数据的名称。
+    /// @param result [返回] 获取到的数据。若获取失败，`result` 中的内容不改变。
+    /// @param name [可选] 要获取数据的对象的名称。默认为解析的第一个对象。
+    /// @return 成功返回 `true`，失败返回 `false`。
+    ///
+    /// 同名对象可使用 `same_name_object` 函数进行名称处理。
+    template <typename T = string_type>
+    bool get(string_type const& key, T& result) noexcept {
+      if (!obj_.count(key))
+        return false;
+      std::any value{ obj_[key] };
+      if (value.type() != typeid(T))
+        return false;
+      result = std::any_cast<T>(value);
+      return true;
     }
 
     /// @brief 判断两个对象是否相等。
@@ -265,13 +283,7 @@ namespace vui::parser
       else
         obj = objs[name.value()];
       
-      if (!obj.count(key))
-        return false;
-      std::any value{ obj[key] };
-      if (value.type() != typeid(T))
-        return false;
-      result = std::any_cast<T>(value);
-      return true;
+      return obj.get(key, result);
     }
 
     /// @brief 解析流中的数据。
@@ -364,6 +376,17 @@ namespace vui::parser
     std::vector<string_type> order_;
     string_type region_;
 
+    /// @brief 判断是否为虚对象。
+    /// @param C [类型] 字符类型。
+    /// @param object_name 对象名。
+    /// @return 是虚对象返回 `true`，不是返回 `false`。
+    /// 
+    /// 以「$」或「@」开头的对象为「虚对象」。
+    template<typename C>
+    bool is_virtual_object(std::basic_string<C> object_name) {
+      return object_name[0] == '$' || object_name[0] == '@';
+    }
+
     bool parse_preprocessor() noexcept
     {
       if (region_.empty()) return true;
@@ -402,20 +425,37 @@ namespace vui::parser
     {
       string_type name{ c };
       if (!read_to('{', name)) return false;
-      object_type obj;
-      do
-      {
-        string_type first;
-        if (!read_to('(', first)) return false;
-        std::any second;
-        if (!read_value(second)) return false;
-        obj.add(first, second);
-      } while ((c = skip_whitespace()) != '}');
+      auto obj_opt = parse_members();
+      if (!obj_opt) return false;
+      auto obj = obj_opt.value();
       while (objs_->count(name)) name += '^';
       objs_.value()[name] = obj;
       if (!is_virtual_object(name))
         order_.emplace_back(std::move(name));
       return true;
+    }
+
+    std::optional<object_type> parse_members() noexcept
+    {
+      CharT c;
+      object_type obj;
+      do {
+        string_type first;
+        auto value_type = read_to('(', first, '{');
+        if (!value_type) return std::nullopt;
+
+        if (value_type == '(') {
+          std::any second;
+          if (!read_value(second)) return std::nullopt;
+          obj.add(first, second);
+        } else {
+          auto members_opt = parse_members();
+          if (!members_opt) return std::nullopt;
+          auto members = members_opt.value();
+          obj.add(first, std::make_any<object_type>(std::move(members)));
+        }
+      } while ((c = skip_whitespace()) != '}');
+      return obj;
     }
 
     CharT skip_whitespace() noexcept
@@ -431,15 +471,16 @@ namespace vui::parser
       while ((stream_ >> c) && c != end);
     }
 
-    bool read_to(CharT end, string_type& out) noexcept
+    CharT read_to(CharT end, string_type& out, CharT end2 = '\0') noexcept
     {
       CharT c{ skip_whitespace() };
-      while ((c != end) && (!stream_.eof()))
+      while ((c != end) && (c != end2) && (!stream_.eof()))
       {
         out += c;
         stream_ >> c;
       }
-      return !stream_.eof();
+      if (stream_.eof()) return 0;
+      else return c;
     }
 
     bool read_value(std::any& out) noexcept
@@ -455,14 +496,11 @@ namespace vui::parser
         {
           if (c == '"')
           {
-            if (s.back() != '\\') 
-            {
-              is_integer = is_decimal = false;
-              bool flag = false;
-              if (!read_string(s, flag)) return false; else if (flag) break;
-            }
-            else 
-              s.back() = '"';
+            if (s.size() == 0 || s.back() != '\\') {
+                is_integer = is_decimal = false;
+                bool flag = false;
+                if (!read_string(s, flag)) return false; else if (flag) break;
+            } else if (s.size() != 0) s.back() = '"';
             c = '\0';
           }
           else if (!is_negative && c == '-') is_negative = true;
@@ -492,10 +530,10 @@ namespace vui::parser
       for (; (c != '"' || out.back() == '\\') && (!stream_.eof()); stream_ >> c)
       {
         if (c == '"') {
-stream_ >> c;
-if (c == ')') { flag = true; break; }
-else out.back() = '"';
-}
+          c = skip_whitespace();
+          if (c == ')') { flag = true; break; }
+          else out.back() = '"';
+        }
         else out += c;
       }
       return !stream_.eof();
@@ -510,19 +548,6 @@ else out.back() = '"';
   std::basic_string<C> same_name_object(std::basic_string<C> object_name, std::basic_string<C> id, C split = ':')
   {
     return object_name + split + id;
-  }
-
-    
-  /// @brief 判断是否为虚对象。
-  /// @param C [类型] 字符类型。
-  /// @param object_name 对象名。
-  /// @return 是虚对象返回 `true`，不是返回 `false`。
-  /// 
-  /// 以「$」或「@」开头的对象为「虚对象」。
-  template<typename C>
-  bool is_virtual_object(std::basic_string<C> object_name)
-  {
-    return object_name[0] == '$' || object_name[0] == '@';
   }
 }
 

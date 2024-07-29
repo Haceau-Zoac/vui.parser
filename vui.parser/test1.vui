@@ -13,4 +13,13 @@ AnotherObject {
   Another("1145"),
   Object(14.1919)
 }
-AndThis {(
+AndThis {
+  Inner{
+    Hello(World),
+    abc{
+      def(g),
+      hi(1)
+    }
+  },
+  haha(ok)
+}

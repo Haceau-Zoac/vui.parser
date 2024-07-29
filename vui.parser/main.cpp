@@ -50,6 +50,26 @@ int main()
       obj.get(L"Object", d, L"AnotherObject");
       std::cout << "AnotherObject.Object: " << d << '\n';
     }
+    std::cout << '\n';
+    {
+      std::wstring out;
+      obj.get(L"haha", out, L"AndThis");
+      std::wcout << "AndThis.haha: " << out << '\n';
+
+      wfparser::object_type object;
+      obj.get(L"Inner", object, L"AndThis");
+      object.get(L"Hello", out);
+      std::wcout << L"AndThis.Inner.Hello: " << out << '\n';
+
+      wfparser::object_type obj2;
+      object.get(L"abc", obj2);
+      obj2.get(L"def", out);
+      std::wcout << L"AndThis.Inner.abc.def: " << out << '\n';
+
+      int i;
+      obj2.get(L"hi", i);
+      std::cout << "AndThis.Inner.abc.hi: " << i << '\n';
+    }
   }
   std::cout << "\n\n\n";
   {
