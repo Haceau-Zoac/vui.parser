@@ -277,7 +277,7 @@ namespace vui::parser
       auto& objs{ objs_.value() };
       object_type obj;
       if (!name.has_value())
-        obj = objs.begin()->second;
+        obj = objs[order_[0]];
       else if (!objs.count(name.value()))
         return false;
       else
