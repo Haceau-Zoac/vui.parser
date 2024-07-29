@@ -19,6 +19,8 @@
 
 namespace vui::parser
 {
+  using object = basic_object<char>;
+  using wobject = basic_object<wchar_t>;
   /// @brief 解析字符串流。
   using parser = basic_parser<std::stringstream, char>;
   /// @brief 解析宽字符串流。
