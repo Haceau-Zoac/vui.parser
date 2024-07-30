@@ -29,7 +29,7 @@ Object {
 
 test.cpp
 
-```
+```cpp
 #include <vui.parser.h>
 using namespace vui::parser;
 
