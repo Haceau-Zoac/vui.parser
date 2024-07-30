@@ -28,7 +28,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="test.vui">
+    <None Include="test1.vui">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="test2.vui">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="test3.vui">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

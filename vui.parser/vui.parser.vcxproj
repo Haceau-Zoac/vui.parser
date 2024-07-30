@@ -150,7 +150,9 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="test.vui" />
+    <None Include="test1.vui" />
+    <None Include="test2.vui" />
+    <None Include="test3.vui" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

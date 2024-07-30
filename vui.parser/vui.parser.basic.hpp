@@ -486,6 +486,7 @@ namespace vui::parser
     bool read_value(std::any& out) noexcept
     {
       bool is_integer = true, is_decimal = true;
+      stream_.unsetf(std::ios_base::skipws); // dont skip whitespace
 
       CharT c{ skip_whitespace()};
       string_type s{};
@@ -514,6 +515,7 @@ namespace vui::parser
         stream_ >> c;
       }
       if (stream_.eof()) return false;
+      stream_.setf(std::ios_base::skipws);
       if (s.empty()) out = "";
       else if (is_integer) out = std::stoi(s);
       else if (is_decimal) out = std::stod(s);

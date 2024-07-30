@@ -1,7 +1,7 @@
 Object {
   QAQ(12),
   az("{()}"),
-  ch(char),
+  ch(ch ar),
   str(\"hello,\"),
   astr()
 }
